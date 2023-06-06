@@ -1,0 +1,49 @@
+---
+title: "Midterm_PSTAT120C"
+author: "JD Lee"
+date: "8/18/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r data}
+library(readr)
+
+data <- read_csv("C:\\Users\\jundo\\Desktop\\PSTAT 120C\\midterm\\data.csv")
+df <- data.frame(data) # Set as a dataframe
+df
+
+ls_model_simple = lm(mpg ~ weight, data = data)
+summary(ls_model_simple)
+
+plot(data$weight, data$mpg) + abline(ls_model_simple, col="Red")
+
+ls_model_multi = lm(mpg ~ weight + displacement, data =data)
+summary(ls_model_multi)
+
+
+##2c
+new <- data.frame(weight = 3000, displacement = 150)
+#df_ls_model_multi =lm(mpg ~ weight, data = df) #ls model through data frame
+#C.I
+predict(ls_model_multi, new, interval = "confidence", level = 0.95)
+#P.I
+predict(ls_model_multi, new, interval = "prediction", level = 0.95)
+
+x <- 36.5096-0.0003083*(3000)-0.07175*(150); x
+
+##2d
+sse_c <- sum((fitted(ls_model_multi) - data$mpg)^2); sse_c
+
+sse_r <- sum((fitted(ls_model_simple) - data$mpg)^2); sse_r
+
+```
+
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```

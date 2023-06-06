@@ -1,0 +1,41 @@
+---
+title: "HW4_PSTAT120C"
+author: "JD Lee"
+date: "8/30/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(tidyverse)
+
+#1
+qchisq(p=0.05, df=3, lower.tail = F)
+counts <- c(56, 19, 17, 8)
+npi <- c(56.25, 18.75, 18.75, 6.25)
+test_stat <- sum(((counts-npi)^2)/npi); test_stat
+
+#2
+qchisq(p=0.05, df=3, lower.tail = F)
+counts <- c(48, 18, 21, 13)
+npi <- c(50, 20, 20, 10)
+test_stat <- sum(((counts-npi)^2)/npi); test_stat
+
+#4
+qchisq(p=0.01, df=3, lower.tail = F)
+lung_matrix <- matrix(c(34, 42, 21, 18,
+                        366, 358, 379, 382), nrow = 2,
+                      byrow = T)
+lung_matrix
+
+chisq.test(lung_matrix)
+
+```
+
+
+
+

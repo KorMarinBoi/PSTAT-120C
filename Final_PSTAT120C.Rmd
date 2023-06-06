@@ -1,0 +1,71 @@
+---
+title: "Final_PSTAT120C"
+author: "JD Lee"
+date: "9/12/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(tidyverse)
+
+#1
+art
+hritis_matrix <-matrix(c(234, 148, 166, 252), nrow = 2, byrow = T)
+arthritis_matrix
+
+qchisq(p=0.05, df=1, lower.tail = F)
+
+chisq.test(arthritis_matrix)
+
+#1b
+row_totals <- NULL
+for(i in 1:2){
+  row_totals[i] <- sum(arthritis_matrix[i, ])
+}
+
+col_totals <- NULL
+for(j in 1:2){
+  col_totals[j] <- sum(arthritis_matrix[,j])
+}
+
+grand_totals <-sum(row_totals)
+
+e_nij <-matrix(NA, nrow = 2, ncol = 2)
+for (i in 1:2) {
+  for (j in 1:2) {
+    e_nij[i,j] <- (row_totals[i]*col_totals[j] / grand_totals)    
+  }  
+}
+
+test_stat <- sum((matrix(arthritis_matrix - e_nij, nrow = 1))^2 / (matrix(e_nij, nrow = 1))); test_stat
+
+pchisq(q=test_stat, df=1, lower.tail = F)
+
+chisq.test(arthritis_matrix)
+
+
+#3a
+m <- 7
+n <- 10
+
+binom.test(x=m, n=10, p=0.5, alternative = "two.sided")
+
+#3b
+a <- c(67, 80, 65, 70, 86, 50, 63, 81, 86, 60)
+b <- c(39, 75, 69, 55, 74, 52, 56, 72, 89, 47)
+t.test(a, b, paired = T)
+
+t.test(a, b, alternative = "greater", paired = T) 
+
+
+#3c
+wilcox.test(a, b, paired = T)
+
+wilcox.test(a, b, alternative = "greater", paired = T)
+```
+

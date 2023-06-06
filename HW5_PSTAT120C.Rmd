@@ -1,0 +1,33 @@
+---
+title: "HW5_PSTAT120C"
+author: "JD Lee"
+date: "9/5/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+oven_a <- c(.135, .102, .108, .141, .131, .144)
+oven_b <- c(.129, .120, .112, .152, .135, .163)
+
+wilcox.test(oven_a, oven_b, paired = TRUE)
+
+
+#Man-Whitney
+proc_a <- c(6.1, 9.2, 8.7, 8.9, 7.6, 7.1, 9.5, 8.3, 9.0)
+proc_b <- c(9.1, 8.2, 8.6, 6.9, 7.5, 7.9, 8.3, 7.8, 8.9)
+
+wilcox.test(proc_a, proc_b)
+
+prod <- c(68.2, 71.6, 69.3, 71.6, 70.4, 65.0, 63.6, 64.7,
+          65.3, 64.2, 67.6, 68.6, 66.8, 68.9, 66.8, 70.1)
+n = 16
+
+sum(prod) / n
+
+```
+

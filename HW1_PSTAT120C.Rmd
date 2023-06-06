@@ -1,0 +1,36 @@
+---
+title: "HW1_PSTAT120C"
+author: "JD Lee"
+date: "8/8/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Pratice
+
+
+```{r Auditors}
+data <- data.frame(
+  audit_value = c(9, 14, 7, 29, 45, 109, 40, 238, 60, 170),
+  book_value = c(10, 12, 9, 27, 47, 112, 36, 241, 59, 167)
+)
+ls_model = lm(audit_value ~ book_value, data = data)
+summary(ls_model)
+plot(data$book_value, data$audit_value) + abline(ls_model, col = "Red")
+
+sse <- sum((fitted(ls_model) - data$audit_value)^2)
+sse
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

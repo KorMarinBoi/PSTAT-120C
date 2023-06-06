@@ -1,0 +1,59 @@
+---
+title: "Extra_Credit_PSTAT120C"
+author: "JD Lee"
+date: "9/12/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+#2
+library(tidyverse)
+library(ggplot2)
+library(ggthemes)
+
+data <- tibble(dog = factor(c(1:4, 1:4, 1:4)),
+               location = factor(c(rep("A", 4), rep("B", 4),
+                                   rep("C", 4))),
+               rate = c(1342, 1140, 1029, 1150,
+                        1608, 1387, 1296, 1319,
+                        1881, 1698, 1549, 1579))
+
+data %>% 
+  group_by(dog) %>% 
+  summarise(mean(rate))
+
+ggplot(data, aes(x = rate)) + 
+  geom_density(aes(fill=dog), alpha = .3) +
+  theme_bw()
+
+data %>% 
+  group_by(location) %>% 
+  summarise(mean(rate))
+
+ggplot(data, aes(x = rate)) + 
+  geom_density(aes(fill=location), alpha = .3) +
+  theme_bw()
+
+ggplot(data, aes(x = factor(dog), y = rate, fill = factor(location))) +
+  geom_bar(stat = "Identity", width = 0.8, position = "dodge") +
+  xlab("Dog") + ylab("Rate") + labs(fill = "Location") +
+  theme_bw()
+
+interaction.plot(x.factor=data$dog, trace.factor=data$location, 
+                 response=data$rate, type='b')
+
+aov(rate ~ dog + location, data = data) %>%
+  summary()
+
+
+aov(rate ~ dog + location, data = data) %>%
+  coefficients()
+
+
+```
+
